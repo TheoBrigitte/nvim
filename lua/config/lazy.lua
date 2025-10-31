@@ -92,10 +92,18 @@ endfunction
 ]]
 
 -- Golang LSP setup using nvim-lspconfig
-vim.lsp.enable('gopls')
 -- Auto-completion
 -- Use CTRL-Y to select an item. |complete_CTRL-Y|
 vim.lsp.config('gopls', {
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
   on_attach = function(client, bufnr)
     vim.lsp.completion.enable(true, client.id, bufnr, {
       autotrigger = true,
@@ -103,8 +111,18 @@ vim.lsp.config('gopls', {
         return { abbr = item.label:gsub('%b()', '') }
       end,
     })
+    -- Enable format on save for Go files
+    if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr })
+        end,
+      })
+    end
   end,
 })
+vim.lsp.enable('gopls')
 
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
