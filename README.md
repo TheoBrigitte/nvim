@@ -22,7 +22,8 @@ A professionally crafted NeoVim setup leveraging [lazy.nvim](https://github.com/
 
 - **NeoVim**: Version 0.10.0 or higher
 - **Git**: Required for plugin management and version control features
-- **Node.js**: Required for Language Server Protocol functionality
+- **Node.js**: Required for Language Server Protocol functionality - nodejs-neovim
+- **Tree-sitter**: Required for object motion  - tree-sitter-cli
 
 ### Recommended Dependencies
 
