@@ -1,0 +1,21 @@
+  spec = {
+    -- General
+    -- {"tpope/vim-fugitive"}, -- git integration
+  },
+
+-- Golang LSP setup using nvim-lspconfig
+vim.lsp.enable('gopls')
+-- Auto-completion
+-- Use CTRL-Y to select an item. |complete_CTRL-Y|
+vim.lsp.config('gopls', {
+  on_attach = function(client, bufnr)
+    vim.lsp.completion.enable(true, client.id, bufnr, {
+      autotrigger = true,
+      convert = function(item)
+        return { abbr = item.label:gsub('%b()', '') }
+      end,
+    })
+  end,
+})
+
+vim.lsp.enable('bashls')

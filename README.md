@@ -261,6 +261,7 @@ Ensure the `cursor-agent` command is available in your PATH.
 - [Lazy.nvim Documentation](https://lazy.folke.io/)
 - [Mason.nvim Documentation](https://github.com/mason-org/mason.nvim)
 - [Blink.cmp Documentation](https://github.com/saghen/blink.cmp)
+- [TreeSitter tutorial](https://www.josean.com/posts/nvim-treesitter-and-textobjects)
 
 ## Notes
 
