@@ -17,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.cmd [[
 set number " Enable line numbers
+set relativenumber " Enable relative line numbers
 set ruler " Show the cursor position
 set incsearch "
 set ignorecase " Case insensitive searching
