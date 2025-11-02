@@ -37,8 +37,17 @@ return {
 				nerd_font_variant = 'mono'
 			},
 
-			-- (Default) Only show the documentation popup when manually triggered
-			completion = { documentation = { auto_show = false } },
+			completion = {
+				-- Show documentation automatically
+				documentation = { auto_show = true },
+				-- Automatically insert brackets after function or method completion
+				accept = { auto_brackets = { enabled = true }, },
+
+				-- Pre-select and auto-insert the first item
+				list = { selection = { preselect = true, auto_insert = true } },
+				-- Display a preview of the selected item on the current line
+				ghost_text = { enabled = true },
+			},
 
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
