@@ -105,12 +105,6 @@ vim.lsp.config('gopls', {
     },
   },
   on_attach = function(client, bufnr)
-    vim.lsp.completion.enable(true, client.id, bufnr, {
-      autotrigger = true,
-      convert = function(item)
-        return { abbr = item.label:gsub('%b()', '') }
-      end,
-    })
     -- Enable format on save for Go files
     if client.server_capabilities.documentFormattingProvider then
       vim.api.nvim_create_autocmd("BufWritePre", {
