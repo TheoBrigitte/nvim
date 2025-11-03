@@ -12,5 +12,8 @@ return {
 			{ "<leader>m", "<cmd>Neotree reveal<CR>", desc = "Reveal file in NeoTree" },
 		},
 		lazy = false, -- neo-tree will lazily load itself
+		opts = {
+			enable_git_status = false,
+		}
 	}
 }
