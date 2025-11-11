@@ -18,10 +18,19 @@ vim.opt.rtp:prepend(lazypath)
 vim.cmd [[
 set number " Enable line numbers
 set relativenumber " Enable relative line numbers
+
 set ruler " Show the cursor position
 set incsearch "
 set ignorecase " Case insensitive searching
 set smartcase " Smart case searching
+
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set autoindent
+set smartindent
+filetype plugin indent on
+
 set listchars=tab:›-,trail:⋅,eol:$ " Set list characters
 set signcolumn=yes " Always show the sign column
 set splitright " Vertical splits will automatically be to the right
