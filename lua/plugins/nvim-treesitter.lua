@@ -14,7 +14,7 @@ return {
         enable = true,
       },
       -- enable indentation
-      indent = { enable = true },
+      indent = { enable = false },
       -- ensure these language parsers are installed
       ensure_installed = {
         "yaml",
