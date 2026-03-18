@@ -31,3 +31,4 @@ require("lazy").setup({
 require("config/settings")
 require("config/mapping")
 require("config/gopls")
+require("config/yamlls")

@@ -1,0 +1,28 @@
+-- YAML LSP setup using nvim-lspconfig
+
+--vim.lsp.config('yamlls', {
+--  settings = {
+--    yaml = {
+--      format = {
+--        enable = true,
+--        singleQuote = false,
+--        bracketSpacing = true,
+--      },
+--      validate = true,
+--      hover = true,
+--      completion = true,
+--    },
+--  },
+--  on_attach = function(client, bufnr)
+--    -- Enable format on save for YAML files
+--    client.server_capabilities.documentFormattingProvider = true
+--    vim.api.nvim_create_autocmd("BufWritePre", {
+--      buffer = bufnr,
+--      callback = function()
+--        vim.lsp.buf.format({ bufnr = bufnr })
+--      end,
+--    })
+--  end,
+--})
+--
+--vim.lsp.enable('yamlls')
