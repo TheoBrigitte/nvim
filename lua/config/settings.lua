@@ -7,13 +7,14 @@ set incsearch "
 set ignorecase " Case insensitive searching
 set smartcase " Smart case searching
 
-"set expandtab
-"set tabstop=2
-"set shiftwidth=2
+set expandtab
+set tabstop=2
+set shiftwidth=2
 set autoindent
-"set smartindent
+set smartindent
 filetype plugin indent on
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+"autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab cursorcolumn "foldmethod=indent
+"autocmd Syntax yaml normal zR
 
 set listchars=tab:›-,trail:⋅,eol:$ " Set list characters
 set signcolumn=yes " Always show the sign column
