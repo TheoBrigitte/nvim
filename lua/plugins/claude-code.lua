@@ -44,11 +44,11 @@ return {
 						popd_cmd = 'popd',       -- Command to pop directory from stack (e.g., 'popd' for bash/zsh, 'exit' for nushell)
 					},
 					-- Command settings
-					command = "cursor-agent",        -- Command used to launch Claude Code
+					command = "claude",        -- Command used to launch Claude Code
 					-- Command variants
 					command_variants = {
 						-- Conversation management
-						continue = "resume", -- Resume the most recent conversation
+						continue = "--continue", -- Resume the most recent conversation
 						resume = "--resume",     -- Display an interactive conversation picker
 
 						-- Output options
