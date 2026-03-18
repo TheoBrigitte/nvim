@@ -185,6 +185,14 @@ After the initial setup, install language servers for your preferred programming
 | `<C-n>/<C-p>` | Next/Previous item |
 | `<C-k>` | Toggle signature help |
 
+### LSP
+
+| Key | Action |
+|-----|--------|
+|  ]d | Jump to next diagnostic |
+|  [d | Jump to previous diagnostic |
+|  <C-w>d | Open diagnostics in a floating window |
+
 ### Shell Check
 
 | Key | Mode | Action |
