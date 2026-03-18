@@ -1,29 +1,41 @@
-vim.cmd [[
-set number " Enable line numbers
-set relativenumber " Enable relative line numbers
+-- File change history / persistent undo
+vim.opt.undofile = true
+vim.opt.undodir = vim.fs.normalize("~/.local/state/nvim/undo//")
 
-set ruler " Show the cursor position
-set incsearch "
-set ignorecase " Case insensitive searching
-set smartcase " Smart case searching
+-- Navigation
+vim.opt.number = true -- Enable line numbers
+vim.opt.relativenumber = true -- Enable relative line numbers
+vim.opt.ruler = true -- Show the cursor position
+vim.opt.scrolloff = 4 -- Keep n lines visible when scrolling
+vim.opt.signcolumn = "yes" -- Always show the sign column to prevent text shifting
+vim.opt.splitright = true -- Open vertical splits to the right of the current window
+vim.opt.splitbelow = true -- Open horizontal splits below the current window
 
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set autoindent
-set smartindent
-filetype plugin indent on
-"autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab cursorcolumn "foldmethod=indent
-"autocmd Syntax yaml normal zR
+-- Search
+vim.opt.incsearch = true
+vim.opt.ignorecase = true -- Case insensitive searching
+vim.opt.smartcase = true -- Smart case searching
 
-set listchars=tab:›-,trail:⋅,eol:$ " Set list characters
-set signcolumn=yes " Always show the sign column
-set splitright " Vertical splits will automatically be to the right
-set splitbelow " Horizontal splits will automatically be below
-" Highlight search results only while searching
-augroup vimrc-incsearch-highlight
-  autocmd!
-  autocmd CmdlineEnter /,\? :set hlsearch
-  autocmd CmdlineLeave /,\? :set nohlsearch
-augroup END
-]]
+-- Indentation
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
+vim.opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
+vim.opt.autoindent = true -- Copy indent from current line when starting a new line
+vim.opt.smartindent = true -- Smart autoindenting when starting a new line
+
+-- Misc
+vim.opt.swapfile = false -- Disable swap files
+vim.opt.listchars = { tab = "›-", trail = "⋅", eol = "$" } -- Set list characters
+
+-- Highlight search results only while searching
+local incsearch_group = vim.api.nvim_create_augroup("vimrc-incsearch-highlight", { clear = true })
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+  group = incsearch_group,
+  pattern = { "/", "\\?" },
+  callback = function() vim.opt.hlsearch = true end,
+})
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+  group = incsearch_group,
+  pattern = { "/", "\\?" },
+  callback = function() vim.opt.hlsearch = false end,
+})
