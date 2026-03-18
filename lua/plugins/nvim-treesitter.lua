@@ -18,7 +18,6 @@ return {
       indent = { enable = false },
       -- ensure these language parsers are installed
       ensure_installed = {
-        "yaml",
         "markdown",
         "markdown_inline",
         "go",
@@ -30,7 +29,7 @@ return {
         "gitignore",
         "query",
       },
-      ignore_install = { "python" },
+      ignore_install = { "python", "yaml" },
       incremental_selection = {
         enable = true,
         keymaps = {

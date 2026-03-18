@@ -65,4 +65,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({async = false})
   end
 })
+
 vim.lsp.enable('gopls')

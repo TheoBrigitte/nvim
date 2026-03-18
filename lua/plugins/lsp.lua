@@ -21,6 +21,7 @@ return {
 			ensure_installed = {
 				"gopls",
 				"copilot",
+				-- "yamlls",
 			},
 		},
 	},
