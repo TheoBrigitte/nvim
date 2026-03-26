@@ -1,5 +1,6 @@
 return {
-	{
-		"wsdjeg/vim-fetch",
-	},
+  {
+    -- TODO: Remove if possible
+    "wsdjeg/vim-fetch",
+  },
 }
