@@ -87,8 +87,7 @@ return {
       },
 
       keymap = {
-        preset = "enter",
-        ["<C-y>"] = { "select_and_accept" },
+        preset = "super-tab"
       },
     },
     opts_extend = { "sources.default" }
