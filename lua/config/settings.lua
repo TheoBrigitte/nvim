@@ -26,8 +26,9 @@ vim.opt.smartindent = true -- Smart autoindenting when starting a new line
 -- Misc
 vim.opt.swapfile = false -- Disable swap files
 vim.opt.listchars = {    -- Set list characters
-  tab = "\\u00b7 ",
+  tab = "  ",
   trail = "\\u00b7",
+  --eol = "$",
 }
 -- ▸ \\u25b8
 -- ◂ \\u25c2
@@ -36,8 +37,9 @@ vim.opt.listchars = {    -- Set list characters
 -- ⦁ \\u2981
 -- • \\u2022
 -- › \\u203A
+-- https://unicodeplus.com
 
-vim.opt.list = false -- Show hidden characters
+vim.opt.list = true -- Show hidden characters
 
 -- Highlight search results only while searching
 local incsearch_group = vim.api.nvim_create_augroup("vimrc-incsearch-highlight", { clear = true })
