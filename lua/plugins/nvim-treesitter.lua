@@ -1,44 +1,58 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
+  branch = "main",
   lazy = false,
-  event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  },
+  build = ":TSUpdate",
   config = function()
-    local treesitter = require("nvim-treesitter.configs")
+    require("nvim-treesitter").install({
+      "bash",
+      "c",
+      "css",
+      "diff",
+      "dockerfile",
+      "git_config",
+      "git_rebase",
+      "gitattributes",
+      "gitcommit",
+      "gitignore",
+      "go",
+      "gomod",
+      "gosum",
+      "gotmpl",
+      "gowork",
+      "graphql",
+      "hcl",
+      "html",
+      "ini",
+      "javascript",
+      "json",
+      "json5",
+      "lua",
+      "luadoc",
+      "make",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "query",
+      "regex",
+      "sql",
+      "terraform",
+      "toml",
+      "tsx",
+      "typescript",
+      "vim",
+      "vimdoc",
+      "xml",
+      "yaml",
+    })
 
-    -- configure treesitter
-    treesitter.setup({ -- enable syntax highlighting
-      highlight = {
-        enable = true,
-      },
-      -- enable indentation
-      indent = { enable = false },
-      -- ensure these language parsers are installed
-      ensure_installed = {
-        "markdown",
-        "markdown_inline",
-        "go",
-        "graphql",
-        "bash",
-        "lua",
-        "vim",
-        "dockerfile",
-        "gitignore",
-        "query",
-      },
-      ignore_install = { "python", "yaml" },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
+    -- Highlighting itself lives in Neovim, not the plugin: start a parser for
+    -- every buffer whose filetype has one. pcall skips filetypes with no parser.
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("treesitter-highlight", { clear = true }),
+      callback = function(args)
+        pcall(vim.treesitter.start, args.buf)
+      end,
     })
   end,
 }

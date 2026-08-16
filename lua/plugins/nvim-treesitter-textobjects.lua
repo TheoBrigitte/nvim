@@ -1,47 +1,52 @@
 return {
   "nvim-treesitter/nvim-treesitter-textobjects",
-  lazy = true,
+  branch = "main",
+  event = { "BufReadPost", "BufNewFile" },
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
-    require("nvim-treesitter.configs").setup({
-      textobjects = {
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            ["]f"] = { query = "@call.outer", desc = "Next function call start" },
-            ["]]"] = { query = "@function.outer", desc = "Next method/function def start" },
-            ["]c"] = { query = "@class.outer", desc = "Next class start" },
-            ["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
-            ["]l"] = { query = "@loop.outer", desc = "Next loop start" },
-
-            -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-            -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-            ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-            ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-          },
-          goto_next_end = {
-            ["]F"] = { query = "@call.outer", desc = "Next function call end" },
-            ["]M"] = { query = "@function.outer", desc = "Next method/function def end" },
-            ["]C"] = { query = "@class.outer", desc = "Next class end" },
-            ["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
-            ["]L"] = { query = "@loop.outer", desc = "Next loop end" },
-          },
-          goto_previous_start = {
-            ["[f"] = { query = "@call.outer", desc = "Prev function call start" },
-            ["[["] = { query = "@function.outer", desc = "Prev method/function def start" },
-            ["[c"] = { query = "@class.outer", desc = "Prev class start" },
-            ["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
-            ["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
-          },
-          goto_previous_end = {
-            ["[F"] = { query = "@call.outer", desc = "Prev function call end" },
-            ["[M"] = { query = "@function.outer", desc = "Prev method/function def end" },
-            ["[C"] = { query = "@class.outer", desc = "Prev class end" },
-            ["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
-            ["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
-          },
-        },
+    require("nvim-treesitter-textobjects").setup({
+      move = {
+        set_jumps = true, -- whether to set jumps in the jumplist
       },
     })
+
+    local move = require("nvim-treesitter-textobjects.move")
+
+    -- { lhs, move function, query, query group, description }
+    -- The query group is the `queries/<lang>/<group>.scm` file to read from.
+    local maps = {
+      { "]f", "goto_next_start",     "@call.outer",        "textobjects", "Next function call start" },
+      { "]]", "goto_next_start",     "@function.outer",    "textobjects", "Next method/function def start" },
+      { "]c", "goto_next_start",     "@class.outer",       "textobjects", "Next class start" },
+      { "]i", "goto_next_start",     "@conditional.outer", "textobjects", "Next conditional start" },
+      { "]l", "goto_next_start",     "@loop.outer",        "textobjects", "Next loop start" },
+      { "]s", "goto_next_start",     "@scope",             "locals",      "Next scope" },
+      { "]z", "goto_next_start",     "@fold",              "folds",       "Next fold" },
+
+      { "]F", "goto_next_end",       "@call.outer",        "textobjects", "Next function call end" },
+      { "]M", "goto_next_end",       "@function.outer",    "textobjects", "Next method/function def end" },
+      { "]C", "goto_next_end",       "@class.outer",       "textobjects", "Next class end" },
+      { "]I", "goto_next_end",       "@conditional.outer", "textobjects", "Next conditional end" },
+      { "]L", "goto_next_end",       "@loop.outer",        "textobjects", "Next loop end" },
+
+      { "[f", "goto_previous_start", "@call.outer",        "textobjects", "Prev function call start" },
+      { "[[", "goto_previous_start", "@function.outer",    "textobjects", "Prev method/function def start" },
+      { "[c", "goto_previous_start", "@class.outer",       "textobjects", "Prev class start" },
+      { "[i", "goto_previous_start", "@conditional.outer", "textobjects", "Prev conditional start" },
+      { "[l", "goto_previous_start", "@loop.outer",        "textobjects", "Prev loop start" },
+
+      { "[F", "goto_previous_end",   "@call.outer",        "textobjects", "Prev function call end" },
+      { "[M", "goto_previous_end",   "@function.outer",    "textobjects", "Prev method/function def end" },
+      { "[C", "goto_previous_end",   "@class.outer",       "textobjects", "Prev class end" },
+      { "[I", "goto_previous_end",   "@conditional.outer", "textobjects", "Prev conditional end" },
+      { "[L", "goto_previous_end",   "@loop.outer",        "textobjects", "Prev loop end" },
+    }
+
+    for _, m in ipairs(maps) do
+      local lhs, fn, query, group, desc = m[1], m[2], m[3], m[4], m[5]
+      vim.keymap.set({ "n", "x", "o" }, lhs, function()
+        move[fn](query, group)
+      end, { desc = desc })
+    end
   end,
 }
