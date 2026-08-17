@@ -8,6 +8,7 @@ return {
       require("kanagawa").setup({
         theme = "wave",
         background = { dark = "wave", light = "lotus" },
+        compile = true,
       })
       vim.cmd.colorscheme("kanagawa-wave")
     end,
