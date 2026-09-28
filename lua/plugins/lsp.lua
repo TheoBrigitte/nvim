@@ -20,7 +20,6 @@ return {
 			-- Only LSP servers here
 			ensure_installed = {
 				"gopls",
-				"copilot",
 				-- "yamlls",
 			},
 		},

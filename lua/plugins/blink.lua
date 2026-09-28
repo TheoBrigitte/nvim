@@ -4,7 +4,7 @@ return {
     -- optional: provides snippets for the snippet source
     dependencies = {
       'rafamadriz/friendly-snippets',
-      'fang2hou/blink-copilot',
+      'milanglacier/minuet-ai.nvim',
     },
 
     -- use a release tag to download pre-built binaries
@@ -29,6 +29,9 @@ return {
         -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
+        kind_icons = {
+          claude = "󰚩",
+        },
       },
 
       completion = {
@@ -58,12 +61,14 @@ return {
       sources = {
         -- adding any nvim-cmp sources here will enable them
         -- with blink.compat
-        default = { "copilot", "lsp", "path", "snippets", "buffer" },
+        default = { "minuet", "lsp", "path", "snippets", "buffer" },
         providers = {
-          copilot = {
-            name = "copilot",
-            module = "blink-copilot",
+          minuet = {
+            name = "minuet",
+            module = "minuet.blink",
             async = true,
+            timeout_ms = 3000,
+            score_offset = 50,
           },
         },
       },
