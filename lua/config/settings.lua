@@ -45,11 +45,17 @@ vim.opt.list = true -- Show hidden characters
 local incsearch_group = vim.api.nvim_create_augroup("vimrc-incsearch-highlight", { clear = true })
 vim.api.nvim_create_autocmd("CmdlineEnter", {
   group = incsearch_group,
-  pattern = { "/", "\\?" },
+  pattern = { "/", "?" },
   callback = function() vim.opt.hlsearch = true end,
 })
 vim.api.nvim_create_autocmd("CmdlineLeave", {
   group = incsearch_group,
-  pattern = { "/", "\\?" },
-  callback = function() vim.opt.hlsearch = false end,
+  pattern = { "/", "?" },
+  callback = function()
+    if vim.v.event.abort then vim.opt.hlsearch = false end
+  end,
 })
+vim.keymap.set("n", "<Esc>", function()
+  vim.opt.hlsearch = false
+  return "<Esc>"
+end, { expr = true, desc = "Clear search highlight" })
