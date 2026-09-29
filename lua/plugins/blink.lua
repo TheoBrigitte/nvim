@@ -61,7 +61,8 @@ return {
       sources = {
         -- adding any nvim-cmp sources here will enable them
         -- with blink.compat
-        default = { "minuet", "lsp", "path", "snippets", "buffer" },
+        default = vim.env.NVIM_NO_CLAUDE and { "lsp", "path", "snippets", "buffer" }
+          or { "minuet", "lsp", "path", "snippets", "buffer" },
         providers = {
           minuet = {
             name = "minuet",

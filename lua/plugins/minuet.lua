@@ -1,6 +1,7 @@
 return {
 	{
 		"milanglacier/minuet-ai.nvim",
+		cond = not vim.env.NVIM_NO_CLAUDE,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
