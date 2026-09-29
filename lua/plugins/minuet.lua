@@ -12,7 +12,7 @@ return {
 			provider_options = {
 				claude = {
 					model = "claude-haiku-4-5",
-					api_key = "ANTHROPIC_API_KEY",
+					api_key = "ANTHROPIC_API_KEY_NVIM",
 				},
 				claude_parallel = {
 					name = "claude",
