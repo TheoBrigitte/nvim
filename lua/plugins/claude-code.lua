@@ -2,7 +2,7 @@ return {
 	{
 		"TheoBrigitte/claude-code.nvim",
 		branch = "window-navigation-keymap",
-		cond = not vim.env.NVIM_NO_CLAUDE,
+		cond = not vim.env.NVIM_NO_CLAUDE and vim.env.ANTHROPIC_API_KEY_NVIM ~= nil,
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- Required for git operations
 		},
