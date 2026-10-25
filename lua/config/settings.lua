@@ -12,6 +12,7 @@ vim.opt.splitright = true -- Open vertical splits to the right of the current wi
 vim.opt.splitbelow = true -- Open horizontal splits below the current window
 
 -- Search
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true -- Case insensitive searching
 vim.opt.smartcase = true -- Smart case searching
@@ -45,12 +46,12 @@ vim.opt.list = true -- Show hidden characters
 local incsearch_group = vim.api.nvim_create_augroup("vimrc-incsearch-highlight", { clear = true })
 vim.api.nvim_create_autocmd("CmdlineEnter", {
   group = incsearch_group,
-  pattern = { "/", "?" },
+  pattern = { "/", "\\?" },
   callback = function() vim.opt.hlsearch = true end,
 })
 vim.api.nvim_create_autocmd("CmdlineLeave", {
   group = incsearch_group,
-  pattern = { "/", "?" },
+  pattern = { "/", "\\?" },
   callback = function()
     if vim.v.event.abort then vim.opt.hlsearch = false end
   end,
